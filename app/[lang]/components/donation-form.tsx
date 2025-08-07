@@ -89,8 +89,8 @@ export function DonationForm({ dict }: DonationFormProps) {
               src="https://js.stripe.com/v3/buy-button.js"
             />
             <stripe-buy-button
-              buy-button-id="buy_btn_1RtNBVA1kyX8OSOiAi39jNuG"
-              publishable-key="pk_test_51RtLg2A1kyX8OSOieBzyPTc2ZjZpYBlwah0KsZKSTBDOv91j8s5EdGZNCGholmTrOFkoCmiXaP9nfDn5j7xJSUwt00M58mcjJX"
+              buy-button-id="buy_btn_1RtO2FArFhxQwA1HtG74a0QP"
+              publishable-key="pk_live_51RtLfsArFhxQwA1HnCjBzDNuB4oz5IQ7EAyd1eriNisbuu3EYIfOIzPoaVDmiynJVRb8ar2lpz2TtvI6AScxRyCa00EFDBXIzn"
             />
           </CardContent>
         </Card>
