@@ -15,6 +15,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { useState } from "react";
 import { octoPaymentService } from "@/lib/octo-payment";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface DonationFormProps {
   dict: any;
@@ -22,6 +23,7 @@ interface DonationFormProps {
 
 export function DonationForm({ dict }: DonationFormProps) {
   const [amount, setAmount] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("UZS");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -45,20 +47,18 @@ export function DonationForm({ dict }: DonationFormProps) {
     setError("");
 
     try {
-      // Haqiqiy Octo Bank API bilan ishlash
       const paymentResult = await octoPaymentService.createPayment(
         parseFloat(amount),
-        "Xayriya to'lovi - Храм Пантелеймона"
+        "Xayriya to'lovi - Храм Пантелеймона",
+        currency
       );
 
       console.log('Payment result:', paymentResult);
 
       if (paymentResult.success && paymentResult.payment_url) {
-        // To'lov muvaffaqiyatli yaratildi
         console.log('Opening payment URL:', paymentResult.payment_url);
         window.open(paymentResult.payment_url, "_blank");
       } else {
-        // Xatolik yuz berdi
         const errorMessage = paymentResult.error || "To'lov yaratishda xatolik yuz berdi";
         console.error('Payment error:', errorMessage);
         setError(errorMessage);
@@ -69,6 +69,20 @@ export function DonationForm({ dict }: DonationFormProps) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Valyuta belgilari
+  const currencySymbols = {
+    UZS: "so'm",
+    USD: "$",
+    EURO: "€"
+  };
+
+  // Valyuta nomlari
+  const currencyNames = {
+    UZS: "O'zbek so'mi",
+    USD: "Amerika dollari",
+    EURO: "Yevro"
   };
 
   return (
@@ -154,20 +168,35 @@ export function DonationForm({ dict }: DonationFormProps) {
             <div className="w-full space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="amount" className="text-sm font-medium">
-                  To'lov summasini kiriting (UZS)
+                  To'lov summasini kiriting
                 </Label>
-                <Input
-                  id="amount"
-                  type="number"
-                  placeholder="100000"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  className="w-full"
-                  min="1000"
-                  step="1000"
-                />
+                <div className="flex gap-2">
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="100000"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    className="flex-1"
+                    min="1"
+                    step="1"
+                  />
+                  <Select value={currency} onValueChange={setCurrency}>
+                    <SelectTrigger className="w-24">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="UZS">UZS</SelectItem>
+                      <SelectItem value="USD">USD</SelectItem>
+                      <SelectItem value="EURO">EURO</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {currencyNames[currency as keyof typeof currencyNames]} ({currencySymbols[currency as keyof typeof currencySymbols]})
+                </div>
               </div>
-              
+
               {error && (
                 <div className="text-red-500 text-sm text-center">
                   {error}
@@ -181,11 +210,11 @@ export function DonationForm({ dict }: DonationFormProps) {
                   <div className="text-blue-500 text-xs">To'lov tizimi</div>
                 </div>
               </div>
-              
+
               <p className="text-sm text-muted-foreground text-center">
                 Octo Bank orqali xavfsiz to'lov qilish uchun tugmani bosing
               </p>
-              
+
               <Button
                 onClick={handleOctoPayment}
                 disabled={isLoading || !amount}

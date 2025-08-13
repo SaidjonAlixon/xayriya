@@ -3,19 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { amount, description } = body;
+    const { amount, description, currency = "UZS" } = body;
 
-    // Octo Bank API konfiguratsiyasi
-    const shopId = process.env.NEXT_PUBLIC_OCTO_SHOP_ID;
-    const secretKey = process.env.OCTO_SECRET;
-    const apiUrl = process.env.NEXT_PUBLIC_OCTO_API_URL;
-
-    if (!shopId || !secretKey || !apiUrl) {
-      return NextResponse.json(
-        { success: false, error: 'API konfiguratsiya topilmadi' },
-        { status: 500 }
-      );
-    }
+    // Octo Bank API konfiguratsiyasi - to'g'ridan-to'g'ri kod ichida
+    const shopId = '41799';
+    const secretKey = 'd1d87a99-5eca-409a-bf41-a68d13fb6edd';
+    const apiUrl = 'https://secure.octo.uz/prepare_payment';
+    const productionUrl = 'https://xayriya.vercel.app';
 
     // Hozirgi vaqtni olish
     const now = new Date();
@@ -35,7 +29,7 @@ export async function POST(request: NextRequest) {
         email: "donor@hayriya.uz"
       },
       total_sum: amount,
-      currency: "UZS",
+      currency: currency, // Foydalanuvchi tanlagan valyuta
       description: description,
       basket: [
         {
@@ -60,8 +54,8 @@ export async function POST(request: NextRequest) {
         }
       ],
       tsp_id: 18, // Default TSP ID
-      return_url: `${process.env.NEXTAUTH_URL || process.env.VERCEL_URL || 'https://xayriya.vercel.app'}/payment/success`,
-      notify_url: `${process.env.NEXTAUTH_URL || process.env.VERCEL_URL || 'https://xayriya.vercel.app'}/api/octo-webhook`,
+      return_url: `${productionUrl}/payment/success`,
+      notify_url: `${productionUrl}/api/octo-webhook`,
       language: "uz",
       ttl: 15 // 15 daqiqa
     };

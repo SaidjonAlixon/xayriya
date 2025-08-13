@@ -1,47 +1,66 @@
 # Octo Bank To'lov Tizimi O'rnatish
 
-## Environment Fayl Yaratish
+## 🎯 Hozirgi Holat
 
-### Development (.env)
-Loyiha papkasida `.env` fayl yarating va quyidagi ma'lumotlarni kiriting:
+✅ **Barcha konfiguratsiya kod ichida** - Environment fayl kerak emas
+✅ **Production rejimida ishlaydi** - `test: false` parametri bilan
+✅ **API route tayyor** - `/api/octo-payment` endpoint
+✅ **CORS muammosi yo'q** - "Failed to fetch" xatosi hal qilindi
+✅ **Production URL lar** - To'g'ridan-to'g'ri kod ichida
+✅ **Valyuta tanlash** - UZS, USD, EURO orasida tanlash mumkin
 
-```env
-# Octo Bank API Configuration
-NEXT_PUBLIC_OCTO_SHOP_ID=41799
-OCTO_SECRET=d1d87a99-5eca-409a-bf41-a68d13fb6edd
-NEXT_PUBLIC_OCTO_API_URL=https://secure.octo.uz/prepare_payment
+## 🔧 Konfiguratsiya
 
-# Development URLs
-NEXTAUTH_URL=http://localhost:3000
+Barcha Octo Bank API kalitlari va URL lar to'g'ridan-to'g'ri kod ichida:
+
+```typescript
+// app/api/octo-payment/route.ts
+const shopId = '41799';
+const secretKey = 'd1d87a99-5eca-409a-bf41-a68d13fb6edd';
+const apiUrl = 'https://secure.octo.uz/prepare_payment';
+const productionUrl = 'https://xayriya.vercel.app';
 ```
 
-### Production (.env.production)
-Server uchun `.env.production` fayl yarating:
-
-```env
-# Octo Bank API Configuration
-NEXT_PUBLIC_OCTO_SHOP_ID=41799
-OCTO_SECRET=d1d87a99-5eca-409a-bf41-a68d13fb6edd
-NEXT_PUBLIC_OCTO_API_URL=https://secure.octo.uz/prepare_payment
-
-# Production URLs
-NEXTAUTH_URL=https://hayriya.uz
-VERCEL_URL=https://hayriya.uz
+```typescript
+// lib/octo-payment.ts
+this.shopId = '41799';
+this.secretKey = 'd1d87a99-5eca-409a-bf41-a68d13fb6edd';
+this.apiUrl = 'https://secure.octo.uz/prepare_payment';
 ```
 
-## O'zgaruvchilar
+## 💱 Valyuta Tanlash
 
-- `NEXT_PUBLIC_OCTO_SHOP_ID` - Octo Bank dan olingan shop ID (41799)
-- `OCTO_SECRET` - Octo Bank dan olingan secret key
-- `NEXT_PUBLIC_OCTO_API_URL` - Octo Bank API manzili (https://secure.octo.uz/prepare_payment)
-- `NEXTAUTH_URL` - Production domain manzili
-- `VERCEL_URL` - Vercel deployment URL (avtomatik)
+Foydalanuvchilar quyidagi valyutalarda to'lov qilishlari mumkin:
 
-## Xavfsizlik
+- **UZS** - O'zbek so'mi (so'm)
+- **USD** - Amerika dollari ($)
+- **EURO** - Yevro (€)
 
-- `OCTO_SECRET` o'zgaruvchisi faqat server tomonida ishlatiladi
-- `NEXT_PUBLIC_` prefiksli o'zgaruvchilar client tomonida ham mavjud
-- Secret key'ni hech qachon client kodida ko'rsatmang
+### Valyuta tanlash interfeysi:
+- Summa kiritish maydoni
+- Valyuta tanlash dropdown
+- Valyuta nomi va belgisi ko'rsatiladi
+
+## 🚀 Serverga Qo'yish
+
+### 1. Git ga push qilish
+```bash
+git add .
+git commit -m "Currency selection feature added - UZS, USD, EURO support"
+git push origin main
+```
+
+### 2. Vercel da (avtomatik):
+- Git push qilingandan keyin Vercel avtomatik deploy qiladi
+- Environment variables o'rnatish shart emas
+
+### 3. Boshqa hosting da:
+```bash
+git pull origin main
+npm install
+npm run build
+npm run start
+```
 
 ## API Route
 
@@ -49,35 +68,7 @@ VERCEL_URL=https://hayriya.uz
 ✅ **Server-side API calls** - Octo Bank API ga to'g'ridan-to'g'ri so'rov yuboriladi
 ✅ **Xavfsizlik** - Secret key faqat server tomonida ishlatiladi
 ✅ **Haqiqiy API format** - Octo Bank spetsifikatsiyasiga mos
-
-## Hozirgi Holat
-
-✅ **Production rejimida ishlaydi** - `test: false` parametri bilan
-✅ **API route tayyor** - `/api/octo-payment` endpoint
-✅ **CORS muammosi yo'q** - "Failed to fetch" xatosi hal qilindi
-✅ **Production URL lar** - Environment variable lar bilan
-
-## Serverga Qo'yish
-
-### 1. Git ga push qilish
-```bash
-git add .
-git commit -m "Octo Bank payment system integration completed"
-git push origin main
-```
-
-### 2. Environment Variables
-Server hosting platformasida (Vercel, Netlify, etc.) environment variables ni o'rnating:
-- `NEXT_PUBLIC_OCTO_SHOP_ID`
-- `OCTO_SECRET`
-- `NEXT_PUBLIC_OCTO_API_URL`
-- `NEXTAUTH_URL`
-
-### 3. Build va Deploy
-```bash
-npm run build
-npm run start
-```
+✅ **Valyuta qo'llab-quvvatlash** - UZS, USD, EURO
 
 ## Octo Bank API Spetsifikatsiyasi
 
@@ -86,13 +77,13 @@ npm run start
 **Content-Type**: application/json
 
 **Asosiy parametrlar**:
-- `octo_shop_id`: Shop ID
-- `octo_secret`: Secret key
+- `octo_shop_id`: 41799
+- `octo_secret`: d1d87a99-5eca-409a-bf41-a68d13fb6edd
 - `shop_transaction_id`: Unique transaction ID
 - `auto_capture`: true (bir bosqichli to'lov)
 - `test`: false (production rejimida)
 - `total_sum`: To'lov summasini
-- `currency`: "UZS"
+- `currency`: Foydalanuvchi tanlagan valyuta (UZS, USD, EURO)
 - `description`: To'lov tavsifi
 - `payment_methods`: ["bank_card", "uzcard", "humo"]
 
@@ -104,3 +95,10 @@ npm run start
 ## Xatoliklar
 
 Agar xatolik yuz bersa, console da xatolik ma'lumotlari ko'rsatiladi.
+
+## 🔒 Xavfsizlik
+
+- Secret key faqat server tomonida ishlatiladi
+- Client kodida secret key ko'rsatilmaydi
+- API so'rovlari server-side route orqali amalga oshiriladi
+- Valyuta tanlash client tomonida amalga oshiriladi

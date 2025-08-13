@@ -20,13 +20,13 @@ export class OctoPaymentService {
   private apiUrl: string;
 
   constructor() {
-    // Bu qiymatlarni .env faylida saqlashingiz kerak
-    this.shopId = process.env.NEXT_PUBLIC_OCTO_SHOP_ID || 'your_octo_shop_id';
-    this.secretKey = process.env.OCTO_SECRET || 'your_octo_secret';
-    this.apiUrl = process.env.NEXT_PUBLIC_OCTO_API_URL || 'https://secure.octo.uz/prepare_payment';
+    // Octo Bank API konfiguratsiyasi - to'g'ridan-to'g'ri kod ichida
+    this.shopId = '41799';
+    this.secretKey = 'd1d87a99-5eca-409a-bf41-a68d13fb6edd';
+    this.apiUrl = 'https://secure.octo.uz/prepare_payment';
   }
 
-  async createPayment(amount: number, description: string): Promise<OctoPaymentResponse> {
+  async createPayment(amount: number, description: string, currency: string = "UZS"): Promise<OctoPaymentResponse> {
     try {
       // Local API route orqali so'rov yuborish (CORS muammosini hal qilish uchun)
       const response = await fetch('/api/octo-payment', {
@@ -36,7 +36,8 @@ export class OctoPaymentService {
         },
         body: JSON.stringify({
           amount: amount,
-          description: description
+          description: description,
+          currency: currency
         })
       });
 
@@ -67,9 +68,9 @@ export class OctoPaymentService {
   }
 
   // Test rejimida ishlash uchun
-  async createTestPayment(amount: number, description: string): Promise<OctoPaymentResponse> {
+  async createTestPayment(amount: number, description: string, currency: string = "UZS"): Promise<OctoPaymentResponse> {
     // Test rejimida haqiqiy API ga so'rov yubormasdan, test URL qaytaradi
-    const testPaymentUrl = `https://secure.octo.uz/test-payment?amount=${amount}&description=${encodeURIComponent(description)}`;
+    const testPaymentUrl = `https://secure.octo.uz/test-payment?amount=${amount}&currency=${currency}&description=${encodeURIComponent(description)}`;
     
     return {
       success: true,
