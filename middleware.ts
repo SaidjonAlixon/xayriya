@@ -16,6 +16,11 @@ function getLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // API so'rovlarini locale redirection dan chiqarib tashlash
+  if (pathname.startsWith('/api/')) {
+    return;
+  }
+
   // Check if there is any supported locale in the pathname
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
