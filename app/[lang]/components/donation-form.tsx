@@ -174,7 +174,7 @@ export function DonationForm({ dict }: DonationFormProps) {
                   <Input
                     id="amount"
                     type="number"
-                    placeholder="100000"
+                    placeholder="1000000"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     className="flex-1"
