@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "about": "Biz haqimizda",
+    "donate": "Xayriya",
+    "contact": "Aloqa"
+  },
+  "hero": {
+    "title": "Panteleymon",
+    "subtitle": "Muqaddas va aziz Panteleymon ibodatxonasi uchun xayriya sahifasi",
+    "cta": "Xayriya qilish"
+  },
+  "about": {
+    "title": "Bizning maqsadimiz",
+    "description": "Biz iymon asosidagi tashabbuslar orqali jamiyatimizga xizmat qilish, muhtojlarga yordam berish va barchaga umid va sevgi tarqatishga bag'ishlanganmiz.",
+    "values": {
+      "title": "Bizning Qadriyatlarimiz",
+      "faith": "Iymon",
+      "faithDesc": "Ruhiy haqiqat va ilohiy hidoyatga asoslangan",
+      "service": "Ehson",
+      "serviceDesc": "Boshqalarga va jamiyatimizga yordam berishga sodiq",
+      "love": "Ziyorat",
+      "loveDesc": "Ruhiy poklanish va o‘zaro mehr-oqibat bilan to‘ldirilgan muqaddas uchrashuv"
+    }
+  },
+  "donation": {
+    "title": "Qo'llab-quvvatlang",
+    "description": "Sizning saxiy xayringiz bizga jamiyatdagi ishimizni davom ettirish, muhtoj oilalarga yordam berish va muqaddas joylarimizni saqlashda yordam beradi.",
+    "buttons": {
+      "donate": "Xayriya Qiling",
+      "support": "Qo'llab-quvvatlang",
+      "openPage": "Xayriya sahifasini oching"
+    },
+    "redirectText": "Tugmani bosish orqali xavfsiz xayriya sahifasiga yo'naltirilasiz",
+    "qr1": {
+      "title": "Donationalerts orqali",
+      "description": "Visa, Mastercard va boshqa xalqaro to'lov tizimlari qo'llab-quvvatlanadi.",
+      "instruction": "Xayriya sahifasiga to'g'ridan-to'g'ri kirish uchun telefoningiz bilan ushbu QR kodni skanerlang."
+    },
+    "qr2": {
+      "title": "Tirikchilik.uz orqali",
+      "description": "Uzcad, Humo, Payme, Uzum, Click  to'lov tizimlari qo'llab-quvvatlanadi.",
+      "instruction": "Xayriya sahifasiga to'g'ridan-to'g'ri kirish uchun telefoningiz bilan ushbu QR kodni skanerlang."
+    },
+    "qr3": {
+      "title": "Vengriya OTP Bank",
+      "description": "Evro OTP VHUHB",
+      "viza_card": "GALIYA RAXIMOVA 5397 1700 0496 4053",
+      "instruction": "Xayriya sahifasiga to'g'ridan-to'g'ri kirish uchun telefoningiz bilan ushbu QR kodni skanerlang."
+    }
+  },
+  "contact": {
+    "title": "Biz bilan bog'lanish",
+    "addressTitle": "Manzil",
+    "phoneTitle": "Telefon",
+    "emailTitle": "Elektron pochta",
+    "serviceTimesTitle": "Bank ma'lumotlari"
+  },
+  "footer": {
+    "address": "Nukis qalasi, A.Shomurotova ko'chasi, 97-joy",
+    "phone": "(36122) 222-34-75, (36122) 222-34-86",
+    "email": "info@panteleymon.com",
+    "hours": "MFO: 00621,\nINN: 204611458 SWIFT/BIC код: UZHOUZ22. Банк: Ipoteka-bank (Акционерный коммерческий ипотечный банк). Город: Ташкент.Страна: Узбекистан."
+  }
+}

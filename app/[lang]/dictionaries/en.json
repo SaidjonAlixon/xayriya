@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "donate": "Donate",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Panteleymon",
+    "subtitle": "Donation page for the Holy and Blessed Panteleymon Church",
+    "cta": "Make a Donation"
+  },
+  "about": {
+    "title": "Our Mission",
+    "description": "We are dedicated to serving our community through faith-based initiatives, helping those in need, and spreading hope and love to all.",
+    "values": {
+      "title": "Our Core Values",
+      "faith": "Faith",
+      "faithDesc": "Rooted in spiritual truth and divine guidance",
+      "service": "Charity",
+      "serviceDesc": "Committed to helping others and our community",
+      "love": "Pilgrimage",
+      "loveDesc": "A sacred encounter filled with spiritual cleansing and mutual compassion"
+    }
+  },
+  "donation": {
+    "title": "Support Us",
+    "description": "Your generous donation helps us continue our work in the community, assist families in need, and maintain our sacred places.",
+    "buttons": {
+      "donate": "Donate Now",
+      "support": "Support",
+      "openPage": "Open Donation Page"
+    },
+    "redirectText": "By clicking the button, you will be redirected to a secure donation page",
+    "qr1": {
+      "title": "Via Donationalerts",
+      "description": "Supports Visa, Mastercard, and other international payment systems.",
+      "instruction": "Scan this QR code with your phone to access the donation page directly."
+    },
+    "qr2": {
+      "title": "Via Tirikchilik.uz",
+      "description": "Supports Uzcard, Humo, Payme, Uzum, and Click payment systems.",
+      "instruction": "Scan this QR code with your phone to access the donation page directly."
+    },
+    "qr3": {
+      "title": "Hungarian OTP Bank",
+      "description": "Euro OTP VHUHB",
+      "viza_card": "GALIYA RAXIMOVA 5397 1700 0496 4053",
+      "instruction": "Scan this QR code with your phone to go directly to the donation page."
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "addressTitle": "Address",
+    "phoneTitle": "Phone",
+    "emailTitle": "Email",
+    "serviceTimesTitle": "Bank Details"
+  },
+  "footer": {
+    "address": "Nukus Fortress, A.Shomurotova Street, Block 97",
+    "phone": "(36122) 222-34-75, (36122) 222-34-86",
+    "email": "info@panteleymon.com",
+    "hours": "MFO: 00621,\nINN: 204611458 SWIFT/BIC code: UZHOUZ22. Bank: Ipoteka-bank (Joint-Stock Commercial Mortgage Bank). City: Tashkent. Country: Uzbekistan."
+  }
+}
